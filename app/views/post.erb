@@ -1,0 +1,29 @@
+
+<form class="" action="/show_all_post" method="post">
+	<input type="submit" value="Ver todos los post">
+</form>
+<br>
+<form class="formulario" action="/postear" method="post" >
+  <input type="text" method="post" name="user_post">
+  <input type="submit" value="enviar post">
+</form>
+
+<br>
+	<%if @all_posts%>
+		<table style="width:100%">
+			<tr>
+				<th>id</th>
+				<th>TITLE</th>
+				<th>AUTOR</th>
+				<th>BODY</th>
+			</tr>
+			<%@all_posts.each do |post|%>
+			<tr>
+				<td><%=post.id%></td>
+				<td><%=post.title%></td>
+				<td><%=post.autor%></td>
+				<td><%=post.body%></td>
+			</tr>
+			<%end%>
+		</table>
+	<%end%>
