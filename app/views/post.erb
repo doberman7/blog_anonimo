@@ -1,13 +1,30 @@
-
-<form class="" action="/show_all_post" method="post">
-	<input type="submit" value="Ver todos los post">
+<!--RENDEREAR un post particular-->
+<form action="show_specific_post" method="post">
+	<input type="text" name="looked_post" placeholder="Escribe post a buscar" >
+	<input type="submit" value="buscar post">
 </form>
+
+<%if @looked_post%>
+	<%@looked_post.each do |po|%>
+		<p> Titulo:<%=po.title%>
+		 Autor:<%=po.autor%>
+		 Cuerpo:<%=po.body%>
+		</p>
+	<%end%>
+<%end%>
 <br>
+
+<!--CREAR nuevo post-->
 <form class="formulario" action="/postear" method="post" >
   <input type="text" method="post" name="user_post">
   <input type="submit" value="enviar post">
 </form>
-
+<!--MOSTRAR todos los post-->
+<form class="" action="/show_all_post" method="GET">
+	<input type="submit" value="Ver todos los post">
+</form>
+<br>
+<!--RENDEREAR to-->
 <br>
 	<%if @all_posts%>
 		<table style="width:100%">
