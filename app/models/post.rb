@@ -2,12 +2,15 @@ class Post < ActiveRecord::Base
   has_many :post_tags
 	has_many :tags, through: :post_tags
 
+  validates :autor, :presence => true
+  validates :title, :presence => true
+  validates :body, :presence => true
 
-  #errors[:Base] << "No existe ese id" if Post.where(id: looked_post).blank?
+  #errors[:Base] << "String message" if condition
+  #errors.add(:base, 'error 404 NOT FOUND') if condition  
+  #  self.errors.full_messages
 
-  #errors.add(:base, 'error 404 NOT FOUND') if condition
 
-  # self.errors.full_messages
 
 
 

@@ -1,3 +1,8 @@
+<%if @errors%>
+	<%=@errors%>
+<%end%>
+<br>
+
 <!--RENDEREAR un post particular-->
 <form action="show_specific_post" method="post">
 	<input type="text" name="looked_post" placeholder="Escribe post a buscar" >
@@ -6,22 +11,31 @@
 
 <%if @looked_post%>
 	<%@looked_post.each do |po|%>
-		<p> Titulo:<%=po.title%>
-		 Autor:<%=po.autor%>
+		<p> Titulo:<%=po.title%> <br>
+		 Autor:<%=po.autor%> <br>
 		 Cuerpo:<%=po.body%>
 		</p>
 	<%end%>
 <%end%>
-<%if @errors%>
-	<%=@errors%>
-<%end%>
+
 <br>
 
 <!--CREAR nuevo post-->
 <form class="formulario" action="/postear" method="post" >
-  <input type="text" method="post" name="user_post">
+  <input type="text" method="post" name="post_autor" placeholder="Autor">
+
+	<input type="text" method="post" name="post_title" placeholder="Titulo">
+
+	<textarea rows="5" cols="50" method="post" name="post_body" placeholder="Post body">
+	</textarea>
+	<br>
   <input type="submit" value="enviar post">
 </form>
+<%if @saved_post_title%>
+	<p>Post con titulo "<%=@saved_post_title%>"
+	ha sido salvado </p>
+<%end%>
+<br>
 <!--MOSTRAR todos los post-->
 <form class="" action="/show_all_post" method="GET">
 	<input type="submit" value="Ver todos los post">
