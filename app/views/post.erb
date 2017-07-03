@@ -4,16 +4,19 @@
 <br>
 
 <!--RENDEREAR un post particular-->
-<form action="show_specific_post" method="post">
+<form action="/search_post" method="post">
 	<input type="text" name="looked_post" placeholder="Escribe post a buscar" >
 	<input type="submit" value="buscar post">
 </form>
 
 <%if @looked_post%>
 	<%@looked_post.each do |po|%>
-		<p> Titulo:<%=po.title%> <br>
-		 Autor:<%=po.autor%> <br>
-		 Cuerpo:<%=po.body%>
+		<p> Titulo: <%=po.title%> <br>
+		 Autor: <%=po.autor%> <br>
+		 Cuerpo: <%=po.body%>
+		 <form class="" action="/edit" method="post">
+			<input type="submit" name="e" value="editar post"> 
+		 </form>
 		</p>
 	<%end%>
 <%end%>

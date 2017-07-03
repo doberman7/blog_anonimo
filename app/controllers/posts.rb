@@ -42,13 +42,15 @@ get "/show_all_post" do
 	erb :index
 end
 #-Mostrar un post determinado.
-post "/show_specific_post" do
-	look_for_post(params[:looked_post])
+post "/search_post" do
+	p "-"*50
+	p params[:looked_post]
+	 look_for_post(params[:looked_post])
 end
 
 # -Crear un post nuevo.
 # -Las Tags serán creadas al momento que se creen los Posts.
-post "/:postear" do
+post "/postear" do
 	# para usert params necesario mismo "name" en "<input", en la vista
 	new_post =  Post.new(autor: params[:post_autor],title: params[:post_title], body: params[:post_body])
 
@@ -60,4 +62,8 @@ post "/:postear" do
 		@errors = @errors.join ", "
 	end
 	erb :index
+end
+
+post "/edit" do
+	p params[:e]
 end
