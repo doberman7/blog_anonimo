@@ -3,7 +3,7 @@
 	-Editar un post existente.
 	-Eliminar un post existente.
 =end
-
+enable :sessions
 #METODO para mostrar todos los pòst
 def show_all_post
 	Post.all
@@ -43,9 +43,8 @@ get "/show_all_post" do
 end
 #-Mostrar un post determinado.
 post "/search_post" do
-	p "-"*50
-	p params[:looked_post]
-	 look_for_post(params[:looked_post])
+	params[:looked_post]
+	look_for_post(params[:looked_post])
 end
 
 # -Crear un post nuevo.
@@ -64,6 +63,7 @@ post "/postear" do
 	erb :index
 end
 
-post "/edit" do
-	p params[:e]
+post "/edit/:po_id" do
+	p "-"*50
+	p params[:po_id]
 end

@@ -14,8 +14,8 @@
 		<p> Titulo: <%=po.title%> <br>
 		 Autor: <%=po.autor%> <br>
 		 Cuerpo: <%=po.body%>
-		 <form class="" action="/edit" method="post">
-			<input type="submit" name="e" value="editar post"> 
+		 <form class="" action="/edit/<%=po.id%>" method="post">
+			<input type="submit" name="post_id" value="editar post">
 		 </form>
 		</p>
 	<%end%>
