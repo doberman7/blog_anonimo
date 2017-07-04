@@ -1,10 +1,12 @@
+<script src="/js/my.js"></script>
+<link rel="stylesheet" href="/css/my.css">
 <%if @errors%>
 	<%=@errors%>
 <%end%>
 <br>
 
 <!--RENDEREAR un post particular-->
-<form action="/search_post" method="post">
+<form action="/search_post" method="post" id="search_p">
 	<input type="text" name="looked_post" placeholder="Escribe post a buscar" >
 	<input type="submit" value="buscar post">
 </form>
@@ -14,8 +16,32 @@
 		<p> Titulo: <%=po.title%> <br>
 		 Autor: <%=po.autor%> <br>
 		 Cuerpo: <%=po.body%>
-		 <form class="" action="/edit/<%=po.id%>" method="post">
-			<input type="submit" name="post_id" value="editar post">
+		 <!--editar posat especìfico-->
+		 <form action="/edit/<%=po.id%>" method="post" class="edit_post">
+			<input type="submit" name="post_id" value="editar " >
+
+				<!------------->
+
+				<div class="hidden_form">
+					<form class="edit_class" action="/postear" method="post" >
+						<input type="text" method="post" name="post_autor" placeholder="Autor">
+
+						<input type="text" method="post" name="post_title" placeholder="Titulo">
+
+						<textarea rows="5" cols="50" method="post" name="post_body" placeholder="Post body">
+						</textarea>
+						<br>
+						<input type="submit" value="editar post">
+					</form>
+					<%if @saved_post_title%>
+						<p>Post con titulo "<%=@saved_post_title%>"
+						ha sido salvado </p>
+					<%end%>
+					<br>
+				</div>
+
+				<!-------------------->
+
 		 </form>
 		</p>
 	<%end%>

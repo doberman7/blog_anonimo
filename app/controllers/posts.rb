@@ -64,6 +64,5 @@ post "/postear" do
 end
 
 post "/edit/:po_id" do
-	p "-"*50
-	p params[:po_id]
+	#params[:po_id]	
 end
