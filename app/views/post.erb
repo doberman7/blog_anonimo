@@ -13,7 +13,7 @@
 <%end%>
 <br>
 
-<!--RENDEREAR un post particular-->
+<!--RENDEREAR POR AUTOR TITLE O ID-->
 <form action="/search_post" method="post" id="search_p">
 	<input type="text" name="looked_post" placeholder="Por autor, id o titulo" >
 	<input type="submit" value="buscar post">
@@ -34,13 +34,18 @@
 <!--CREAR nuevo post-->
 <h2>Crear nuevo post</h2>
 <form class="formulario" action="/postear" method="post" >
-  <input type="text" method="post" name="post_autor" placeholder="Autor">
+  <input type="text"  name="post_autor" placeholder="Autor">
 
-	<input type="text" method="post" name="post_title" placeholder="Titulo">
+	<input type="text"  name="post_title" placeholder="Titulo">
 
-	<textarea rows="5" cols="50" method="post" name="post_body" placeholder="Post body">
+	<textarea rows="5" cols="50"  name="post_body" placeholder="Post body">
 	</textarea>
 	<br>
+
+ <!--TAGS-->
+ <label for="post_tags">Tags:</label>
+	<input id="post_tags" name="post[tags]" value="tag1, tag2, otro tag, cuarto tag">
+
   <input type="submit" value="enviar post">
 </form>
 <%if @saved_post_title%>

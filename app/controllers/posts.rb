@@ -1,8 +1,3 @@
-=begin
-
-
-	-Eliminar un post existente.
-=end
 enable :sessions
 #METODO para mostrar todos los pòst
 def show_all_post
@@ -79,13 +74,13 @@ post "/edit" do
 end
 
 post "/update_post/:post_data_id" do
-	@post_to_edit_changed = Post.where(id: params[:post_data_id]).update(autor: params[:update_post_autor],title: params[:update_post_title], body: params[:update_post_body])
+	@post_to_edit_changed = Post.where(id: params[:post_data_id]).update(autor: params[:update_post_autor] ,title: params[:update_post_title], body: params[:update_post_body])
 	erb :index
 end
 
+# 	-Eliminar un post existente.
 post "/delete" do
-
-	p post_to_edit =  Post.find_by(id: params[:p_id])
+	post_to_edit =  Post.find_by(id: params[:p_id])
 	if post_to_edit.blank?
 		@errors = "no registros con ese ID"
 		erb :index
