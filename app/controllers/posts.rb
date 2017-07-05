@@ -61,8 +61,8 @@ end
 # -Editar un post existente.
 
 post "/edit" do
-	p params[:edit_id]
-	p post_to_edit =   Post.where(id: params[:edit_id])
+	params[:edit_id]
+	post_to_edit =   Post.where(id: params[:edit_id])
 	if post_to_edit.blank?
 		@errors = "no registros con ese ID"
 		erb :index
@@ -85,7 +85,7 @@ post "/delete" do
 		@errors = "no registros con ese ID"
 		erb :index
 	else
-		p post_to_edit.destroy
+		post_to_edit.destroy
 		@founded = "Encontrado y eliminado"
 	  erb :index
 	end
