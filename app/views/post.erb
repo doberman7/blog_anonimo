@@ -1,5 +1,13 @@
-<script src="/js/my.js"></script>
-<link rel="stylesheet" href="/css/my.css">
+<%=@founded if @founded != nil%>
+
+<%if @post_to_edit_changed%>
+	<%@post_to_edit_changed.each do |data_edited|%>
+			Post con id <%=data_edited.id%> editado,
+			Titulo cambiado a "<%=data_edited.title%>",
+			Autor cambiado a "<%=data_edited.autor%>",
+			Data cambiado a "<%=data_edited.body%>"
+	<%end%>
+<%end%>
 <%if @errors%>
 	<%=@errors%>
 <%end%>
@@ -7,7 +15,7 @@
 
 <!--RENDEREAR un post particular-->
 <form action="/search_post" method="post" id="search_p">
-	<input type="text" name="looked_post" placeholder="Escribe post a buscar" >
+	<input type="text" name="looked_post" placeholder="Por autor, id o titulo" >
 	<input type="submit" value="buscar post">
 </form>
 
@@ -16,33 +24,7 @@
 		<p> Titulo: <%=po.title%> <br>
 		 Autor: <%=po.autor%> <br>
 		 Cuerpo: <%=po.body%>
-		 <!--editar posat especìfico-->
-		 <form action="/edit/<%=po.id%>" method="post" class="edit_post">
-			<input type="submit" name="post_id" value="editar " >
 
-				<!------------->
-
-				<div class="hidden_form">
-					<form class="edit_class" action="/postear" method="post" >
-						<input type="text" method="post" name="post_autor" placeholder="Autor">
-
-						<input type="text" method="post" name="post_title" placeholder="Titulo">
-
-						<textarea rows="5" cols="50" method="post" name="post_body" placeholder="Post body">
-						</textarea>
-						<br>
-						<input type="submit" value="editar post">
-					</form>
-					<%if @saved_post_title%>
-						<p>Post con titulo "<%=@saved_post_title%>"
-						ha sido salvado </p>
-					<%end%>
-					<br>
-				</div>
-
-				<!-------------------->
-
-		 </form>
 		</p>
 	<%end%>
 <%end%>
@@ -50,6 +32,7 @@
 <br>
 
 <!--CREAR nuevo post-->
+<h2>Crear nuevo post</h2>
 <form class="formulario" action="/postear" method="post" >
   <input type="text" method="post" name="post_autor" placeholder="Autor">
 
@@ -65,12 +48,14 @@
 	ha sido salvado </p>
 <%end%>
 <br>
+
+
 <!--MOSTRAR todos los post-->
+<h2>MOSTRAR todos los post</h2>
 <form class="" action="/show_all_post" method="GET">
 	<input type="submit" value="Ver todos los post">
 </form>
 <br>
-<!--RENDEREAR to-->
 <br>
 	<%if @all_posts%>
 		<table style="width:100%">
@@ -90,3 +75,47 @@
 			<%end%>
 		</table>
 	<%end%>
+
+
+
+
+
+	<h2>EDITAR Post</h2>
+	<form class="" action="/edit" method="post">
+		<input type="text" name="edit_id" value="" placeholder="ingresar id">
+		<input type="submit" name="" value="submit ">
+	</form>
+	<%if @post_to_edit%>
+
+		<p>Esto es el contenido del post</p>
+		<%@post_to_edit.each do |post_data|%>
+			<p>
+				ID: <%=post_data.id%> <br>
+				Title: <%=post_data.title%> <br>
+				Autor: <%=post_data.autor%><br>
+				Body: <%=post_data.body%>
+
+				<p>Que deseas editar??</p>
+				<form action="/update_post/<%=post_data.id%>" method="post" >
+
+				  <input type="text"  name="update_post_autor" placeholder="Autor">
+
+					<input type="text"  name="update_post_title" placeholder="Titulo">
+
+					<textarea rows="5" cols="50"  name="update_post_body" placeholder="Post body">
+					</textarea>
+
+					<br>
+				  <input type="submit" value="editar">
+				</form>
+
+			</p>
+
+		<%end%>
+	<%end%>
+
+<h2>Eliminar Post</h2>
+<form action="/delete" method="post">
+	<input type="text" name="p_id" value="" placeholder="ingresar id">
+	<input type="submit" name="" value="Eliminar">
+</form>

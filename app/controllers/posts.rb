@@ -1,6 +1,6 @@
 =begin
 
-	-Editar un post existente.
+
 	-Eliminar un post existente.
 =end
 enable :sessions
@@ -63,6 +63,35 @@ post "/postear" do
 	erb :index
 end
 
-post "/edit/:po_id" do
-	#params[:po_id]	
+# -Editar un post existente.
+
+post "/edit" do
+	p params[:edit_id]
+	p post_to_edit =   Post.where(id: params[:edit_id])
+	if post_to_edit.blank?
+		@errors = "no registros con ese ID"
+		erb :index
+	else
+		@founded = "Encontrado para editar ir a la seccion correspondiente"
+		@post_to_edit = post_to_edit
+	  erb :index
+	end
+end
+
+post "/update_post/:post_data_id" do
+	@post_to_edit_changed = Post.where(id: params[:post_data_id]).update(autor: params[:update_post_autor],title: params[:update_post_title], body: params[:update_post_body])
+	erb :index
+end
+
+post "/delete" do
+
+	p post_to_edit =  Post.find_by(id: params[:p_id])
+	if post_to_edit.blank?
+		@errors = "no registros con ese ID"
+		erb :index
+	else
+		p post_to_edit.destroy
+		@founded = "Encontrado y eliminado"
+	  erb :index
+	end
 end
