@@ -34,19 +34,26 @@ post "/show_tag" do
 		 # separate the input throw a regex with comas, ignoring black spaces and put in a Ary
 		 ary_whit_input = input_in_the_form.split (/\s*,\s*/)
 		 # itarate throw the ary
+		 rong_tags = []
+		 tag_postIDs = Hash.new
 		 ary_whit_input.uniq.each do |tag_name|
 			 # find if the tag already exists
 			 tags = Tag.where(name: tag_name)
+
 			 if tags.blank?
-				 # create a new tag
-				 @errors = "No existe tag:  #{tags_name}"
+				 rong_tags << tag_name
+				 @errors = "No existir tag:  #{rong_tags*", "}"
 			 else
 					posts_ids = []
 					tags.each do |tag_atribute|
 							PostTag.where(tags_id: tag_atribute.id).each do |relation|
-								  posts_ids << relation.posts_id
+								   posts_ids << relation.posts_id
+									 tag_postIDs[tag_atribute.name]
 							end
+							tag_postIDs[tag_atribute.name] =  posts_ids
 					end
+					p "-"*50
+					@tag_postIDs = tag_postIDs
 					@posts = []
 					posts_ids.each do |id|
 						 @posts << Post.find(id)

@@ -1,3 +1,6 @@
+<%if @errors%>
+	<%=@errors%>
+<%end%>
 <h2>buscar TAG</h2>
 <form action="/show_tag" method="post">
 	<label for="tags_searched_tag">Tagss</label>
@@ -9,6 +12,7 @@
 
 <% if @posts %>
 	<%@posts.each do |post| %>
+		<%=@tag_postIDs%>
 		ID:<%=post.id%> <br>
 		Autor <%=post.autor%> <br>
 		Title: <%=post.title%> <br>
