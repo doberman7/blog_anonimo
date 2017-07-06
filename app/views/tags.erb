@@ -12,11 +12,17 @@
 
 <% if @posts %>
 	<%@posts.each do |post| %>
-		<%=@tag_postIDs%>
-		ID:<%=post.id%> <br>
-		Autor <%=post.autor%> <br>
-		Title: <%=post.title%> <br>
-		Body: <%=post.body%> <br>
-		<p>---------------------</p>
-	<% end%>
+		<%@tag_postIDs.each_key do |tag|%>
+		<%=tag%>
+		<%=@tag_postIDs[tag]%>
+			<%=@tag_postIDs[tag].include?(post.id) %><br>
+
+		<%end%>
+
+			ID:<%=post.id%> <br>
+			Autor <%=post.autor%> <br>
+			Title: <%=post.title%> <br>
+			Body: <%=post.body%> <br>
+			<p>---------------------</p>
+		<% end%>
 <% end%>
