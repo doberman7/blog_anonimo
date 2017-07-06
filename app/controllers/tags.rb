@@ -58,6 +58,7 @@ post "/show_tag" do
 					posts_ids.each do |id|
 						 @posts << Post.find(id)
 					end
+					p @posts
 			 end
 		 end
 	 else

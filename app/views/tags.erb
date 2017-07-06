@@ -13,10 +13,9 @@
 <% if @posts %>
 	<%@posts.each do |post| %>
 		<%@tag_postIDs.each_key do |tag|%>
-		<%=tag%>
-		<%=@tag_postIDs[tag]%>
-			<%=@tag_postIDs[tag].include?(post.id) %><br>
-
+			<% if @tag_postIDs[tag].include?(post.id) %>
+				TAG :<%=tag%>	<br>
+			<%end%>
 		<%end%>
 
 			ID:<%=post.id%> <br>
