@@ -28,8 +28,6 @@ end
 
 #Mostrar todos los posts con cierto Tag.
 post "/show_tag" do
-
-
 	 unless params[:tags][:searched_tag].empty?
 		 # access to the values of the hass params throw the keys
 		 input_in_the_form = params[:tags][:searched_tag]
@@ -38,22 +36,25 @@ post "/show_tag" do
 		 # itarate throw the ary
 		 ary_whit_input.uniq.each do |tag_name|
 			 # find if the tag already exists
-
-
-			 p tags = Tag.where(name: tag_name)
-			 # if not already exists
+			 tags = Tag.where(name: tag_name)
 			 if tags.blank?
 				 # create a new tag
-				 @errors = "No existe tag:  #{tag_name}"
+				 @errors = "No existe tag:  #{tags_name}"
 			 else
-				 tags.each do |tag|
-					 	tag
-				 end
+					posts_ids = []
+					tags.each do |tag_atribute|
+							PostTag.where(tags_id: tag_atribute.id).each do |relation|
+								  posts_ids << relation.posts_id
+							end
+					end
+					@posts = []
+					posts_ids.each do |id|
+						 @posts << Post.find(id)
+					end
 			 end
-
-
 		 end
-
+	 else
+		 @errors = "ingresa tag"
 	 end
 
 	erb :index

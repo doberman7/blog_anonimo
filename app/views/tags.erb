@@ -5,3 +5,14 @@
 
 	<input type="submit" value="buscar tag">
 </form>
+<br>
+
+<% if @posts %>
+	<%@posts.each do |post| %>
+		ID:<%=post.id%> <br>
+		Autor <%=post.autor%> <br>
+		Title: <%=post.title%> <br>
+		Body: <%=post.body%> <br>
+		<p>---------------------</p>
+	<% end%>
+<% end%>
